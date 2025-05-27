@@ -9,6 +9,7 @@ const routes = [
   { path: '/recipes', name: 'recipes', component: RecipeList },
   { path: '/recipe/:id', name: 'recipeDetail', component: RecipeDetail },
   { path: '/favorites', name: 'favorites', component: Favorites },
+  { path: '/search', name: 'search', component: RecipeList}
 ];
 
 export default createRouter({
