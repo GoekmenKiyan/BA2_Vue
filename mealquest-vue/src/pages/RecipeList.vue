@@ -4,7 +4,9 @@
       🍽️ Gefundene Rezepte für "{{ query }}"
     </h2>
 
-    <div v-if="loading && recipes.length === 0" class="text-center text-gray-500">Lade Rezepte...</div>
+    <div v-if="loading && recipes.length === 0" class="text-center text-gray-500">
+      Lade Rezepte...
+    </div>
 
     <div v-if="!loading && recipes.length === 0" class="text-center text-gray-500">
       Keine Rezepte gefunden.
@@ -17,14 +19,16 @@
         @click="goToDetail(recipe.id)"
         class="cursor-pointer bg-white shadow rounded-lg overflow-hidden hover:shadow-lg transition"
       >
-        <img :src="recipe.image" :alt="recipe.title" class="w-full h-48 object-cover" />
+        <img :src="recipe.image" :alt="recipe.title" class="w-full h-48 object-cover" loading="lazy" decoding="async" />
         <div class="p-4">
           <h3 class="font-semibold text-lg text-center">{{ recipe.title }}</h3>
         </div>
       </div>
     </div>
 
-    <p v-if="loading && recipes.length > 0" class="text-center text-gray-500 mt-6">Mehr wird geladen...</p>
+    <p v-if="loading && recipes.length > 0" class="text-center text-gray-500 mt-6">
+      Mehr wird geladen...
+    </p>
   </div>
 </template>
 
@@ -44,6 +48,10 @@ const offset = ref(0);
 const query = ref(route.query.q || '');
 const diet = ref(route.query.diet || '');
 const sort = ref(route.query.sort || '');
+
+const goToDetail = (id) => {
+  router.push({ name: 'recipeDetail', params: { id } });
+};
 
 const loadMore = async () => {
   if (loading.value || !hasMore.value) return;
